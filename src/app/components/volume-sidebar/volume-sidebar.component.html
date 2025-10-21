@@ -1,0 +1,116 @@
+
+  <div class="settings-container">
+    <!-- Control de Volumen -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Volumen</ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <ion-item>
+          <ion-icon slot="start" name="volume-low" *ngIf="volume <= 30"></ion-icon>
+          <ion-icon slot="start" name="volume-medium" *ngIf="volume > 30 && volume <= 70"></ion-icon>
+          <ion-icon slot="start" name="volume-high" *ngIf="volume > 70"></ion-icon>
+          
+          <ion-range 
+            [value]="volume"
+            (ionInput)="onVolumeChange($event)"
+            [pin]="true"
+            [pinFormatter]="volumeFormatter"
+            min="0" 
+            max="100"
+            color="primary">
+            <ion-label slot="start">0%</ion-label>
+            <ion-label slot="end">100%</ion-label>
+          </ion-range>
+        </ion-item>
+
+        <ion-text color="medium">
+          <p class="volume-value">Volumen actual: {{ volume }}%</p>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Prueba de Sonido -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Prueba de Sonido</ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6">
+              <ion-button 
+                expand="block" 
+                color="success" 
+                (click)="audioService.playSound('acierto')"
+                fill="outline">
+                <ion-icon slot="start" name="checkmark-circle"></ion-icon>
+                Acierto
+              </ion-button>
+            </ion-col>
+            
+            <ion-col size="6">
+              <ion-button 
+                expand="block" 
+                color="danger" 
+                (click)="audioService.playSound('error')"
+                fill="outline">
+                <ion-icon slot="start" name="close-circle"></ion-icon>
+                Error
+              </ion-button>
+            </ion-col>
+          </ion-row>
+          
+          <ion-row>
+            <ion-col size="6">
+              <ion-button 
+                expand="block" 
+                color="warning" 
+                (click)="audioService.playSound('victoria')"
+                fill="outline">
+                <ion-icon slot="start" name="trophy"></ion-icon>
+                Victoria
+              </ion-button>
+            </ion-col>
+            
+            <ion-col size="6">
+              <ion-button 
+                expand="block" 
+                color="dark" 
+                (click)="audioService.playSound('derrota')"
+                fill="outline">
+                <ion-icon slot="start" name="sad"></ion-icon>
+                Derrota
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <ion-button 
+          expand="block" 
+          color="primary" 
+          (click)="testSound()"
+          class="ion-margin-top">
+          <ion-icon slot="start" name="play"></ion-icon>
+          Probar Sonido
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Información -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Información</ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <ion-text color="medium">
+          <p>
+            El volumen se guardará automáticamente y se aplicará a todos los sonidos del juego.
+          </p>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+  </div>

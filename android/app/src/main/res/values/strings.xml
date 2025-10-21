@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Juego de ahorcado</string>
+    <string name="title_activity_main">Juego de ahorcado</string>
+    <string name="package_name">io.ahorcado.juego</string>
+    <string name="custom_url_scheme">io.ahorcado.juego</string>
+</resources>

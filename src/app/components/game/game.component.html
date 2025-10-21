@@ -1,0 +1,113 @@
+  
+
+<ion-header [translucent]="false">
+
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+  <div class="container-juego">
+    <div class="game-wrapper">
+      <ion-buttons slot="end">
+          <ion-button (click)="openVolumeSettings()" fill="clear">
+          <ion-icon slot="icon-only" name="volume-medium"></ion-icon>
+          </ion-button>
+          </ion-buttons>
+      <div class="top-bar">
+        <button (click)="volverAlMenu()" class="btn-menu">
+          ← Menú Principal
+        </button>
+        <div class="info-juego">
+          {{ tematica }} - {{ nivel }}
+          
+        </div>
+      </div>
+
+      <div class="game-board">
+        <div class="intentos-section">
+          <h2 class="intentos-titulo">Intentos restantes: {{ estado?.attemptsRemaining }}</h2>
+          <br>
+          <br>
+          <div class="intentos-dots">
+        
+        <div *ngFor="let intento of [].constructor(estado?.attemptsRemaining || 0); let i = index" class="dot activo"></div>
+          </div>
+        </div>
+
+        <div class="ahorcado-section">
+          <svg class="ahorcado-svg" viewBox="0 0 200 200">
+            <line x1="20" y1="230" x2="180" y2="230" stroke="#333" stroke-width="4" />
+            <line x1="50" y1="230" x2="50" y2="20" stroke="#333" stroke-width="4" />
+            <line x1="50" y1="20" x2="130" y2="20" stroke="#333" stroke-width="4" />
+            <line x1="130" y1="20" x2="130" y2="50" stroke="#333" stroke-width="4" />
+
+            <circle *ngIf="(estado?.attemptsRemaining || 6) <= 5" cx="130" cy="70" r="20" stroke="#333" stroke-width="4"
+              fill="none" />
+
+            <line *ngIf="(estado?.attemptsRemaining || 6) <= 4" x1="130" y1="90" x2="130" y2="140" stroke="#333"
+              stroke-width="4" />
+
+            <line *ngIf="(estado?.attemptsRemaining || 6) <= 3" x1="130" y1="100" x2="110" y2="120" stroke="#333"
+              stroke-width="4" />
+
+            <line *ngIf="(estado?.attemptsRemaining || 6) <= 2" x1="130" y1="100" x2="150" y2="120" stroke="#333"
+              stroke-width="4" />
+
+            <line *ngIf="(estado?.attemptsRemaining || 6) <= 1" x1="130" y1="140" x2="110" y2="170" stroke="#333"
+              stroke-width="4" />
+
+            <line *ngIf="(estado?.attemptsRemaining || 6) === 0" x1="130" y1="140" x2="150" y2="170" stroke="#333"
+              stroke-width="4" />
+          </svg>
+        </div>
+
+        <div class="palabra-container"> 
+  <div class="palabra-display">{{ palabraVisible }}</div>
+</div>
+
+        <div *ngIf="!estado?.gameOver" class="teclado-section">
+          <h3 class="teclado-titulo">Selecciona una letra:</h3>
+          <div class="teclado-grid">
+            <button *ngFor="let letra of letras" (click)="seleccionarLetra(letra)" [disabled]="letraUsada(letra)"
+              class="tecla" [class.incorrecta]="esIncorrecto(letra)" [class.correcta]="!esIncorrecto(letra) && letraUsada(letra)" >
+              {{ letra }}
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="estado?.gameOver" class="fin-juego-section">
+          <div>
+            <div class="fin-juego-emoji">
+              {{ estado?.winner ? '🎉' : '😢' }}
+            </div>
+            <h2 class="fin-juego-titulo" [class.winner]="estado?.winner" [class.perdido]="!estado?.winner">
+              {{ estado?.winner ? '¡Enhorabuena!' : '¡Juego terminado!' }}
+            </h2>
+            <p class="fin-juego-texto">
+              {{ estado?.winner ? '¡Has adivinado la palabra!' : 'La palabra era:' }}
+            </p>
+            <p class="fin-juego-palabra">{{ estado?.secretWord }}</p>
+          </div>
+          <div class="fin-juego-botones">
+            <button (click)="jugarDeNuevo()" class="btn-action btn-jugar">
+              Jugar de Nuevo
+            </button>
+            <button (click)="volverAlMenu()" class="btn-action btn-menu-final">
+              Menú Principal
+            </button>
+          </div>
+        </div>
+        <!-- <div class="palabra-section">
+          <div *ngIf="estado && estado.lettersFailed && estado.lettersFailed.size > 0" class="letras-incorrectas">
+            <p class="letras-incorrectas-titulo">Letras incorrectas:</p>
+            <div class="letras-incorrectas-lista">
+              <span *ngFor="let letra of obtenerLetrasArray(estado.lettersFailed)" class="letra-incorrecta">
+                {{ letra }}
+              </span>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</ion-content>

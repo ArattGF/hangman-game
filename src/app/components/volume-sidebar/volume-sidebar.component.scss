@@ -1,0 +1,56 @@
+/* volume-sidebar.component.scss */
+:host {
+  --height: 80vh;
+  --border-radius: 16px 16px 0 0;
+}
+
+.settings-container {
+  padding: 8px 0;
+}
+
+.volume-value {
+  text-align: center;
+  font-size: 0.9em;
+  margin: 16px 0 8px 0;
+}
+
+ion-card {
+  margin: 16px 0;
+  
+  ion-card-header {
+    padding-bottom: 8px;
+  }
+  
+  ion-card-title {
+    font-size: 1.1em;
+    font-weight: 600;
+  }
+}
+
+ion-range {
+  padding: 8px 0;
+}
+
+ion-button {
+  margin: 4px 0;
+}
+
+/* Asegurar que el modal se abra desde abajo */
+ion-content {
+  --background: var(--ion-background-color, #ffffff);
+}
+
+/* Para pantallas más pequeñas */
+@media (max-height: 700px) {
+  :host {
+    --height: 85vh;
+  }
+  
+  .settings-container {
+    padding: 4px 0;
+  }
+  
+  ion-card {
+    margin: 12px 0;
+  }
+}

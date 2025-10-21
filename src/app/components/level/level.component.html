@@ -1,0 +1,42 @@
+  
+
+
+<ion-header [translucent]="false">
+
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+
+
+     <div class="container-nivel">
+      <div class="content-wrapper">
+            <ion-buttons slot="end">
+<ion-button (click)="openVolumeSettings()" fill="clear">
+  <ion-icon slot="icon-only" name="volume-medium"></ion-icon>
+</ion-button>
+    </ion-buttons>
+        <div class="header-section">
+          <button (click)="volver()" class="btn-volver">
+            ← Volver al Menú
+          </button>
+          <h1 class="title">{{ tematica }}</h1>
+          <p class="subtitle">Selecciona el nivel de dificultad</p>
+        </div>
+
+        <div class="niveles-grid">
+          <button (click)="iniciarJuego('normal')" class="nivel-card">
+            <div class="icono">⭐</div>
+            <h2 class="nivel-nombre">Normal</h2>
+            <p class="nivel-desc">Palabras sencillas y comunes</p>
+          </button>
+
+          <button (click)="iniciarJuego('avanzado')" class="nivel-card">
+            <div class="icono">🏆</div>
+            <h2 class="nivel-nombre">Avanzado</h2>
+            <p class="nivel-desc">Palabras más complejas</p>
+          </button>
+        </div>
+      </div>
+    </div>
+</ion-content>
