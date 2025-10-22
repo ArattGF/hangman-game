@@ -22,7 +22,7 @@ export class LevelComponent  implements OnInit {
 
  tematica: Theme = 'general';
 
- 
+
     showVolumeSidebar = false;
 
 async openVolumeSettings() {

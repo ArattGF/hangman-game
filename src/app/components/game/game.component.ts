@@ -17,7 +17,7 @@ import { AdmobService } from 'src/app/services/admob.service';
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
-    imports: [    
+    imports: [
     CommonModule,
     FormsModule,
     IonicModule,
@@ -25,7 +25,7 @@ import { AdmobService } from 'src/app/services/admob.service';
 })
 export class GameComponent  implements OnInit, OnDestroy {
 
-  
+
     showVolumeSidebar = false;
 
 async openVolumeSettings() {
@@ -38,7 +38,7 @@ async openVolumeSettings() {
   });
   await modal.present();
 }
-  
+
 esIncorrecto(_t51: string) {
   if(_t51 && this.estado) {
     return this.estado.lettersFailed.has(_t51);
@@ -123,12 +123,12 @@ onModalDismiss() {
   }
 
   jugarDeNuevo(): void {
-        this.admobService.showNativeAdvanced();
+    this.admobService.showInterstitial();
     this.juegoService.iniciarNuevoJuego(this.tematica, this.nivel);
   }
 
   volverAlMenu(): void {
-    this.admobService.showNativeAdvanced();
+    this.admobService.showInterstitial();
     this.router.navigate(['/']);
   }
 }

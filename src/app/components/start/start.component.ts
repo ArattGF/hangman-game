@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
@@ -8,19 +8,22 @@ import { VolumeSidebarComponent } from '../volume-sidebar/volume-sidebar.compone
 import { IonRouterOutlet } from '@ionic/angular';
 
 import { AdmobService } from 'src/app/services/admob.service';
+import { AdMob, BannerAdPosition, BannerAdSize } from '@capacitor-community/admob';
 
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
   styleUrls: ['./start.component.scss'],
   standalone: true,
-  imports: [    
+  imports: [
     CommonModule,
     FormsModule,
     IonicModule
   ]
 })
-export class StartComponent {
+export class StartComponent{
+
+
 
   tematicas = [
     {
@@ -56,6 +59,10 @@ export class StartComponent {
       private admobService: AdmobService
   ) {}
 
+  ionViewWillEnter() {
+    this.admobService.showBannerBottomCenter();
+  }
+
 async openVolumeSettings() {
   const modal = await this.modalController.create({
     component: VolumeSidebarComponent,
@@ -68,7 +75,7 @@ async openVolumeSettings() {
 }
 
   seleccionarTematica(tematica: string): void {
-    this.admobService.showNativeAdvanced();
+    this.admobService.showInterstitial();
     this.router.navigate(['/level', tematica]);
   }
 }

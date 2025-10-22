@@ -31,7 +31,7 @@ export class GameService {
   }
 
   iniciarNuevoJuego(tematica: Theme, Level: Level): void {
-        this.admobService.showNativeAdvanced();
+        this.admobService.showInterstitial();
     const palabra = this.palabrasService.obtenerPalabraAleatoria(tematica, Level);
     const nuevoEstado: GameState = {
       secretWord: palabra,
@@ -67,7 +67,8 @@ export class GameService {
       if (this.palabraCompletada(estadoActual.secretWord, nuevoEstado.lettersGuessed)) {
         nuevoEstado.gameOver = true;
         nuevoEstado.winner = true;
-            this.admobService.showNativeAdvanced();
+        this.admobService.showBannerTopCenter();
+        this.admobService.showInterstitial();
         this.audioService.playSound('victoria');
       }
     } else {
@@ -78,7 +79,7 @@ export class GameService {
       if (nuevoEstado.attemptsRemaining === 0) {
         nuevoEstado.gameOver = true;
         nuevoEstado.winner = false;
-            this.admobService.showNativeAdvanced();
+            this.admobService.showInterstitial();
         this.audioService.playSound('derrota');
       }
     }
@@ -99,7 +100,8 @@ export class GameService {
 
   reiniciarJuego(): void {
     const estadoInicial = this.crearEstadoInicial();
-        this.admobService.showNativeAdvanced();
+    this.admobService.showBannerTopCenter();
+        this.admobService.showInterstitial();
     this.GameStateSubject.next(estadoInicial);
   }
 }
